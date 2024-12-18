@@ -1,10 +1,22 @@
-import "../public/css/styles.css";
-import DateCounter from "./components/DateCounter";
+import { useEffect } from "react";
+import Header from "./components/Header";
+import Main from "./components/Main";
 
 function App() {
+  useEffect(function () {
+    fetch("http://localhost:9000/questions")
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((e) => console.error(e.message));
+  }, []);
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <DateCounter />
+    <div className="flex flex-col items-center justify-between">
+      <Header />
+      <Main>
+        <p>1/15</p>
+        <p>Question</p>
+      </Main>
     </div>
   );
 }
