@@ -1,6 +1,9 @@
 import { useEffect, useReducer } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Error from "./components/Handling/Error";
+import Loader from "./components/Handling/Loader";
+import StartScreen from "./components/Screens/StartScreen";
 
 const initialState = {
   questions: [],
@@ -28,8 +31,9 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  console.log(status);
+  const numQuestions = questions.length;
   useEffect(function () {
     fetch("http://localhost:9000/questions")
       .then((res) => res.json())
@@ -37,15 +41,19 @@ function App() {
       .catch((e) => dispatch({ type: "dataFailed" }));
   }, []);
 
+  console.log(status);
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 text-gray-800">
+    <div className="min-h-screen flex flex-col items-center bg-[#343a40] text-[#f1f3f5] p-8">
       <Header />
-      <Main>
-        <div className="flex items-center justify-between text-lg font-semibold mb-4">
-          <p>1/15</p>
-          <p className="text-blue-600">Question</p>
-        </div>
-      </Main>
+      <div className="flex-grow flex items-center justify-center">
+        <Main>
+          <div className="flex flex-col items-center gap-6 text-lg font-semibold">
+            {status === "loading" && <Loader />}
+            {status === "failed" && <Error />}
+            {status === "ready" && <StartScreen numQuestions={numQuestions} />}
+          </div>
+        </Main>
+      </div>
     </div>
   );
 }
