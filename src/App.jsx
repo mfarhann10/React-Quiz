@@ -4,6 +4,7 @@ import Main from "./components/Main";
 import Error from "./components/Handling/Error";
 import Loader from "./components/Handling/Loader";
 import StartScreen from "./components/Screens/StartScreen";
+import QuestionsScreen from "./components/Screens/QuestionsScreen";
 
 const initialState = {
   questions: [],
@@ -25,6 +26,11 @@ function reducer(state, action) {
         ...state,
         status: "failed",
       };
+    case "start":
+      return {
+        ...state,
+        status: "active",
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -32,7 +38,7 @@ function reducer(state, action) {
 
 function App() {
   const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
-  console.log(status);
+
   const numQuestions = questions.length;
   useEffect(function () {
     fetch("http://localhost:9000/questions")
@@ -41,7 +47,6 @@ function App() {
       .catch((e) => dispatch({ type: "dataFailed" }));
   }, []);
 
-  console.log(status);
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#343a40] text-[#f1f3f5] p-8">
       <Header />
@@ -50,7 +55,10 @@ function App() {
           <div className="flex flex-col items-center gap-6 text-lg font-semibold">
             {status === "loading" && <Loader />}
             {status === "failed" && <Error />}
-            {status === "ready" && <StartScreen numQuestions={numQuestions} />}
+            {status === "ready" && (
+              <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
+            )}
+            {status === "active" && <QuestionsScreen />}
           </div>
         </Main>
       </div>
