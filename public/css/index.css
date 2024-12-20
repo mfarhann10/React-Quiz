@@ -157,14 +157,14 @@ progress {
 }
 
 .btn-option.correct {
-  background-color: var(--color-theme);
-  border: 2px solid var(--color-theme);
-  color: var(--color-light);
+  background-color: #1098ad;
+  border: 2px solid #1098ad;
+  color: #f1f3f5;
 }
 .btn-option.wrong {
-  background-color: var(--color-accent);
-  border: 2px solid var(--color-accent);
-  color: var(--color-darkest);
+  background-color: #ffa94d;
+  border: 2px solid #ffa94d;
+  color: #343a40;
 }
 
 .answer {
