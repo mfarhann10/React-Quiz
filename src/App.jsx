@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { useEffect, useReducer } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -13,6 +14,7 @@ const initialState = {
   status: "loading",
   index: 0,
   answer: null,
+  points: 0,
 };
 
 function reducer(state, action) {
@@ -34,9 +36,15 @@ function reducer(state, action) {
         status: "active",
       };
     case "newAnswer":
+      const question = state.questions.at(state.index);
       return {
         ...state,
         answer: action.payload,
+        //update points or score
+        points:
+          action.payload === question.correctOption
+            ? state.points + question.points
+            : state.points,
       };
     default:
       throw new Error("Unknown action");
