@@ -6,6 +6,7 @@ import Error from "./components/Handling/Error";
 import Loader from "./components/Handling/Loader";
 import StartScreen from "./components/Screens/StartScreen";
 import QuestionsScreen from "./components/Screens/QuestionsScreen";
+import NextButton from "./components/NextButton";
 
 const initialState = {
   questions: [],
@@ -46,6 +47,11 @@ function reducer(state, action) {
             ? state.points + question.points
             : state.points,
       };
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -56,7 +62,6 @@ function App() {
     reducer,
     initialState
   );
-
   const numQuestions = questions.length;
   useEffect(function () {
     fetch("http://localhost:9000/questions")
@@ -77,11 +82,14 @@ function App() {
               <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
             )}
             {status === "active" && (
-              <QuestionsScreen
-                question={questions[index]}
-                dispatch={dispatch}
-                answer={answer}
-              />
+              <>
+                <QuestionsScreen
+                  question={questions[index]}
+                  dispatch={dispatch}
+                  answer={answer}
+                />
+                <NextButton answer={answer} dispatch={dispatch} />
+              </>
             )}
           </div>
         </Main>
