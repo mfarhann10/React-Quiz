@@ -25,3 +25,29 @@ header h1 {
     background-position: 0% 50%, 50% 50%, 100% 100%;
   }
 }
+
+.progress {
+  margin-bottom: 1rem;
+  display: grid;
+  justify-content: space-between;
+  gap: 1.2rem;
+  grid-template-columns: auto auto;
+  font-size: 1.8rem;
+  color: #ffa94d;
+}
+
+progress {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 12px;
+  grid-column: 1 / -1;
+}
+
+::-webkit-progress-bar {
+  background-color: #343a40;
+  border-radius: 100px;
+}
+::-webkit-progress-value {
+  background-color: #ffa94d;
+  border-radius: 100px;
+}
