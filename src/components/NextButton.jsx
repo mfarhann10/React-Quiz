@@ -4,7 +4,7 @@ function NextButton({ dispatch, answer, index, numQuestions }) {
   if (index < numQuestions - 1)
     return (
       <button
-        className="px-6 py-3 rounded-lg bg-gray-500 text-white font-semibold text-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-gray-600 active:scale-95"
+        className="px-6 py-3 rounded-full bg-gray-500 text-white font-semibold text-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-gray-600 active:scale-95"
         onClick={() => {
           dispatch({ type: "nextQuestion" });
         }}
@@ -15,7 +15,7 @@ function NextButton({ dispatch, answer, index, numQuestions }) {
   if (index === numQuestions - 1)
     return (
       <button
-        className="px-6 py-3 rounded-lg bg-gray-500 text-white font-semibold text-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-gray-600 active:scale-95"
+        className="px-6 py-3 rounded-full bg-gray-500 text-white font-semibold text-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-gray-600 active:scale-95"
         onClick={() => {
           dispatch({ type: "finish" });
         }}
