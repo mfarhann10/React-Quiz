@@ -12,7 +12,7 @@ import Timer from "./components/Timer";
 import { useQuiz } from "./context/QuizContext";
 
 function App() {
-  const { status, index } = useQuiz();
+  const { status } = useQuiz();
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#343a40] text-[#f1f3f5] p-8">
       <Header />
