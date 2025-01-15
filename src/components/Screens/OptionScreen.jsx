@@ -1,5 +1,8 @@
-/* eslint-disable react/prop-types */
-function OptionScreen({ question, dispatch, answer }) {
+import { useQuiz } from "../../context/QuizContext";
+
+function OptionScreen() {
+  const { questions, dispatch, answer, index } = useQuiz();
+  const question = questions[index];
   const hasAnswered = answer !== null;
   const btn =
     "w-full text-left px-4 py-2 rounded-lg border transition-transform transform hover:translate-x-5 hover:bg-gray-300";
