@@ -1,11 +1,7 @@
-/* eslint-disable react/prop-types */
-function ProgressScreen({
-  index,
-  points,
-  numQuestions,
-  maxPossiblePoints,
-  answer,
-}) {
+import { useQuiz } from "../../context/QuizContext";
+
+function ProgressScreen() {
+  const { index, points, numQuestions, maxPossiblePoints, answer } = useQuiz();
   return (
     <header>
       <progress value={index + Number(answer !== null)} max={numQuestions} />

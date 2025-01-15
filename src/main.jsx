@@ -3,9 +3,12 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import "../public/css/styles.css";
+import { QuizProvider } from "./context/QuizContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <QuizProvider>
+      <App />
+    </QuizProvider>
   </StrictMode>
 );
